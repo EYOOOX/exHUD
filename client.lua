@@ -9,10 +9,6 @@ Citizen.CreateThread(function()
 	end
 end)
 
-Config = {}
-
-Config.AllTime = false ------ TRUE = HUD ACTIVER TOUT LE TEMPS, FALSE = HUD VISIBLE AVEC LA TOUCHE ","
-
 PlayerData = {}
 
 RegisterNetEvent('esx:playerLoaded')
@@ -81,30 +77,15 @@ function dataemj()
 	DrawText(0.82, 0.163)
 end
 
-if Config.AllTime then
-	Citizen.CreateThread(function()
-		while true do
-			Citizen.Wait(5)
+Citizen.CreateThread(function()
+	while true do
+		Citizen.Wait(5)
+		if IsControlPressed(0,244) then
 			databank()
 			datamoney()
 			datajob()
 			dataemj()
 			datasale()
 		end
-	end)
-		
-	else
-
-	Citizen.CreateThread(function()
-		while true do
-			Citizen.Wait(5)
-			if IsControlPressed(0,244) then
-				databank()
-				datamoney()
-				datajob()
-				dataemj()
-				datasale()
-			end
-		end
-	end)
-end
+	end
+end)
